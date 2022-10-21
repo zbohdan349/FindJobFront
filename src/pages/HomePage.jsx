@@ -1,24 +1,47 @@
+import { Button, Center } from "@mantine/core"
+import { useEffect, useState } from "react"
 import { CardComponent } from "../components/CardComponent"
 import { MainLayout } from "../layout/MainLayout"
+import { getRandomVacancies } from "../services/vacancyService"
 
-export const HomePage = ( ) => {
+export const HomePage = () => {
+
+  const [randomList,setRandomList] = useState([]);
+
+  useEffect( () =>{
+    getRandomVacancies().then( data => {
+      setRandomList(data);
+    });
+  }, [] )
+
+  const renderVacancies = (arr) => {
+     return arr.map( el => {
+      return(
+      <div className="w-[460px]" key={el.id}>
+        <CardComponent
+          image={el.company.img}
+          title={el.name}
+          price={el.salary}
+          companyName={el.company.name}
+          desc={el.smallDescription}
+          categories ={el.categories}
+        />
+      </div>)
+    })
+  }
+
+  const list = renderVacancies(randomList);
+  
   return (
     <MainLayout>
-      <div className="w-full flex justify-center pt-7
-       max-w-7xl">
-        <div className="max-w-[320px]">
-          <CardComponent 
-            image="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80"
-            title='Full stack developer'
-            price='1500$'
-            companyName='Epam'
-            desc='With Fjord Tours you can explore more of the magical fjord landscapes
-            with tours and activities on and around the fjords of Norway'
-          />
-        </div>
+      <div className='h-96  w-full flex justify-center items-center bg-additional-color '>
+          <Button>sadd</Button>
       </div>
-      
-        
+      <Center>
+        <div className="w-full flex justify-center pt-7 max-w-7xl">
+          {list}
+        </div>
+      </Center>
     </MainLayout>
   )
 }

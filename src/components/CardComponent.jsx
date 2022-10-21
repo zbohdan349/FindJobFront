@@ -1,7 +1,7 @@
-import { Card, Image, Text, Badge, Button, Group, Divider } from "@mantine/core";
+import { Card, Text, Badge, Button, Group, Divider } from "@mantine/core";
 
 export const CardComponent = (props) => {
-  const {image, title, price, companyName, desc} = props;
+  const {image, title, price, companyName, desc, categories} = props;
 
   return (
     <Card className='bg-additional-color border-0' shadow="sm" p="lg" radius="md" withBorder>
@@ -12,8 +12,8 @@ export const CardComponent = (props) => {
         </Badge>
       </Group>
       <Divider />
-      <Card.Section className='flex justify-between items-center px-5 pb-4 pt-4' component="a" href="https://mantine.dev/">
-        <div className="w-[65%]  h-[80px] rounded-md">
+      <Card.Section className='flex items-center px-5 pb-4 pt-4' component="a">
+        <div className="w-[100px]  h-[100px] rounded-md">
         <img
           src={image}  
           alt="Norway"
@@ -21,14 +21,19 @@ export const CardComponent = (props) => {
         />
         </div>
         
-        <p className="max-w-[140px] text-2xl text-text-color pl-2 truncate">{companyName}</p> 
+        <p className="max-w-[140px] text-2xl text-text-color pl-2 ">{companyName}</p> 
       </Card.Section>
 
-
+      {categories.map( category =>{
+        return(
+          <Badge key={category.id} className='bg-gray-300 text-slate-500 m-1' >
+            {category.name}
+          </Badge>
+        )
+      })}
 
       <Text size="sm" className='text-text-color'>
         {desc}
-        
       </Text>
 
       <Button className='w-full mt-2 hover:bg-hover-color transition-all'>

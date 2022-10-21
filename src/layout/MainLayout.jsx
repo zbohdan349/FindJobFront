@@ -10,7 +10,7 @@ import { Avatar, Menu } from '@mantine/core';
 export const MainLayout = ({children}) => {
 
   const location = useLocation()
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(false)
   return (
     <>
     <header className='w-full bg-secondary-bg-color'>
@@ -22,11 +22,11 @@ export const MainLayout = ({children}) => {
       <ul className='flex gap-3'>
         <li className={clsx(
           'border-b-[1px] pb-1',
-          `${location.pathname === '/home' ? 'border-text-color' : 'border-none'}`
+          `${location.pathname === '/' ? 'border-text-color' : 'border-none'}`
           )}
         >
           <a href='s' className=' text-text-color'>
-            <NavLink to='/home'>Home</NavLink>
+            <NavLink to='/'>Home</NavLink>
           </a>
         </li>
         <li className={clsx(
