@@ -1,16 +1,17 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 import {faInfinity} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { Button, Divider } from '@mantine/core';
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { Avatar, Menu } from '@mantine/core';
+import {LoginContext} from '../App'
 
 export const MainLayout = ({children}) => {
 
   const location = useLocation()
-  const [isAuth, setIsAuth] = useState(false)
+  const {isAuth} = useContext(LoginContext);
   return (
     <>
     <header className='w-full bg-secondary-bg-color'>
@@ -40,7 +41,7 @@ export const MainLayout = ({children}) => {
         </li>
       </ul>
       {!isAuth ? (<div className='pr-8'>
-        <Button className='hover:bg-hover-color'>Log in</Button>
+        <Link to='/login'><Button className='hover:bg-hover-color'>Log in</Button></Link>
       </div>) : (
       <div className='pr-8'>
         <Menu shadow="md" width={140}>

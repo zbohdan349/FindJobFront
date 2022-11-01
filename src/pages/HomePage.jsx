@@ -2,11 +2,12 @@ import { Button, Center } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { CardComponent } from "../components/CardComponent"
 import { MainLayout } from "../layout/MainLayout"
-import { getRandomVacancies } from "../services/vacancyService"
+import { useServices } from "../services/vacancyService"
 
 export const HomePage = () => {
 
   const [randomList,setRandomList] = useState([]);
+  const {getRandomVacancies} = useServices();
 
   useEffect( () =>{
     getRandomVacancies().then( data => {
