@@ -8,7 +8,7 @@ export const CardComponent = (props) => {
       <Group position="apart" className="pb-4">
         <Text className='text-text-color text-lg' weight={500}>{title}</Text>
         <Badge className='bg-gray-300 text-lg text-slate-500' >
-          {price}
+          {price +"$"}
         </Badge>
       </Group>
       <Divider />

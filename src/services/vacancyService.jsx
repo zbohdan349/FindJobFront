@@ -8,17 +8,22 @@ export const useServices = () =>{
         const response = await request(_URL);
         return  response;
     }
+    const getFilteredVacancies =  async function(body){
+        console.log(body)
+        const response = await request(`${_URL}vacancies`,'POST',JSON.stringify(body));
+        return  response;
+    }
 
     const getFilterProperties = async()=>{
-        const response = await request(`${_URL}find`)
+        const response = await request(`${_URL}find`);
         return response;
     }
 
     const authRequest = async (body) =>{
-        const response = await request(`${_URL}auth/login`,'POST',JSON.stringify(body))
+        const response = await request(`${_URL}auth/login`,'POST',JSON.stringify(body));
         return  response;
     }
 
-    return {getRandomVacancies,authRequest,getFilterProperties}
+    return {getRandomVacancies,authRequest,getFilterProperties,getFilteredVacancies}
 }
 

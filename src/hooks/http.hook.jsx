@@ -11,8 +11,10 @@ export const useHttp = () => {
         setLoading(true);
         const token = localStorage.getItem('Authorization');
         if(!token) headers.Authorization = token;
+        
         try {
-            const response = await fetch(url,{method,body,headers});
+            const response = await fetch(url,{method,body:body,headers});
+            console.log(body)
 
             if (!response.ok) {
                 if ([401, 403].includes(response.status)) {

@@ -1,6 +1,9 @@
 import { MultiSelect, Checkbox, Slider, Button} from '@mantine/core';
 import { useEffect,useState } from 'react';
 import { useServices } from '../services/vacancyService'
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 const textColor={ label: 'text-text-color' }
 const Category = (props) => {
@@ -14,7 +17,24 @@ const Category = (props) => {
 
 }
 
+const schema = z.object({
+    categories: z.any(),
+    levels: z.any(),
+    salary: z.any()
+  });
+
+let obj =
+    {
+        categories: [],
+        levels: [],
+        minSalary: 0
+    };
+
 export const FilterForm = (props) => {
+
+    const { register, handleSubmit} = useForm({
+        resolver: zodResolver(schema)
+      });
 
     const[categories,setCategories] = useState([]) ;
     const[levels,setLevels]  = useState([]);
@@ -39,11 +59,15 @@ export const FilterForm = (props) => {
     },[])
 
     return (
-    <div className="flex flex-col p-4 bg-additional-color border-0 rounded-md">
+    <form onSubmit={handleSubmit(d => {
+        props.updateReqProperties(obj);
+    })}
+        className="flex flex-col p-4 bg-additional-color border-0 rounded-md">
         <Category>
             <MultiSelect classNames={textColor}
                 data={categories}
                 placeholder="Оберіть категорію"
+                onChange={value => obj.categories=value}
                 label="КАТЕГОРІЇ"
                 radius="md"
                 size="md"
@@ -53,14 +77,15 @@ export const FilterForm = (props) => {
             <Checkbox.Group
                 className='pb-2'
                 classNames={textColor}
+                onChange = {value => obj.levels=value}
                 orientation="vertical"
                 label="ОБЕРІТЬ БАЖАНИЙ РІВЕНЬ НАВИЧОК"
                 spacing="xs"
                 offset="sm"
                 >
                 {levels.map(
-                    (level) => {
-                        return <Checkbox color="gray" classNames={textColor} value={level} label={level} />
+                    (level,i) => {
+                        return <Checkbox key={i} color="gray" classNames={textColor} value={level} label={level} />
                     }
                 )}   
                 
@@ -72,12 +97,13 @@ export const FilterForm = (props) => {
             <Slider
                 color="gray"
                 radius="md"
+                onChangeEnd = {value => obj.minSalary=value-1}
                 min = {minSalary}
                 max = {maxSalary}
                 showLabelOnHover={false}
             />
         </Category>
         <Button className='hover:bg-hover-color' size='md' type="submit">Шукати</Button>
-    </div>
+    </form>
     );
 };
