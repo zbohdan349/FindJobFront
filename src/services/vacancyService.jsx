@@ -14,6 +14,11 @@ export const useServices = () =>{
         return  response;
     }
 
+    const getVacancyById =  async function(id){
+        const response = await request(`${_URL}vacancies/${id}`);
+        return  response;
+    }
+
     const getFilterProperties = async()=>{
         const response = await request(`${_URL}find`);
         return response;
@@ -24,6 +29,12 @@ export const useServices = () =>{
         return  response;
     }
 
-    return {getRandomVacancies,authRequest,getFilterProperties,getFilteredVacancies}
+    return {
+        getRandomVacancies,
+        authRequest,
+        getFilterProperties,
+        getFilteredVacancies,
+        getVacancyById
+    }
 }
 

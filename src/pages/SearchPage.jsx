@@ -35,6 +35,7 @@ export const SearchPage = ( ) => {
      return(
      <div className="w-[460px] mb-5" key={el.id}>
        <CardComponent
+        id ={el.id}
          image={el.company.img}
          title={el.name}
          price={el.salary}

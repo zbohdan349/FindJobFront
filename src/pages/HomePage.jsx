@@ -20,6 +20,7 @@ export const HomePage = () => {
       return(
       <div className="w-[460px]" key={el.id}>
         <CardComponent
+          id ={el.id}
           image={el.company.img}
           title={el.name}
           price={el.salary}

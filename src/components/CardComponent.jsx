@@ -1,7 +1,8 @@
 import { Card, Text, Badge, Button, Group, Divider } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 export const CardComponent = (props) => {
-  const {image, title, price, companyName, desc, categories} = props;
+  const {id,image, title, price, companyName, desc, categories} = props;
 
   return (
     <Card className='bg-additional-color border-0' shadow="sm" p="lg" radius="md" withBorder>
@@ -37,7 +38,7 @@ export const CardComponent = (props) => {
       </Text>
 
       <Button className='w-full mt-2 hover:bg-hover-color transition-all'>
-        Перейти до вакансії
+      <Link to={`vacancies/${id}`}>Перейти до вакансії </Link>
       </Button>
     </Card>
   );
