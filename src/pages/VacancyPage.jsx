@@ -52,6 +52,7 @@ export const VacancyPage = () =>{
 
       <Button className='w-full mt-2 hover:bg-hover-color transition-all'>
       Перейти до вакансії 
+      
       </Button>
           
       </div>

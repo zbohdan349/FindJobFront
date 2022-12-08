@@ -11,7 +11,9 @@ import {LoginContext} from '../App'
 export const MainLayout = ({children}) => {
 
   const location = useLocation()
-  const {isAuth} = useContext(LoginContext);
+  const {isAuth,role,logout} = useContext(LoginContext);
+
+
   return (
     <>
     <header className='w-full bg-secondary-bg-color'>
@@ -32,31 +34,40 @@ export const MainLayout = ({children}) => {
         </li>
         <li className={clsx(
           'border-b-[1px] pb-1',
-          `${location.pathname === '/test' ? 'border-text-color' : 'border-none'}`
+          `${location.pathname === '/search' ? 'border-text-color' : 'border-none'}`
           )}
         >
         <a href='s' className='pb-1 text-text-color'>
-            <NavLink to='/test' >Test</NavLink>
+            <NavLink to='/search' >Search</NavLink>
           </a>
         </li>
       </ul>
       {!isAuth ? (<div className='pr-8'>
         <Link to='/login'><Button className='hover:bg-hover-color'>Log in</Button></Link>
       </div>) : (
+        
       <div className='pr-8'>
         <Menu shadow="md" width={140}>
+        <Menu.Target >
+          <div className='cursor-pointer'>
+            <Avatar radius="xl">MK</Avatar>
+          </div>
+      </Menu.Target>
       <Menu.Target >
           <div className='cursor-pointer'>
             <Avatar radius="xl">MK</Avatar>
           </div>
       </Menu.Target>
 
+     
+
       <Menu.Dropdown className='bg-secondary-bg-color border-none '>
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Settings</Menu.Item>
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Messages</Menu.Item>
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Gallery</Menu.Item>
         <Divider className=''/>
-        <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Log out</Menu.Item>
+        <Menu.Item className='text-text-color hover:bg-hover-color' icon={''} onClick={logout}>
+        <Link to={`/`}>Log out</Link></Menu.Item>
       </Menu.Dropdown>
 
     </Menu>

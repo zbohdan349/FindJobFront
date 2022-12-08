@@ -3,7 +3,9 @@ import {useServices} from '../services/vacancyService'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import {LoginContext} from '../App'
 import * as z from "zod";
+import { useContext } from 'react';
 
 const schema = z.object({
   email: z.string().min(1,{message:'Empty field'}),
@@ -16,6 +18,10 @@ const navigate = useNavigate();
 
 const {authRequest} =useServices();
 
+const {login} = useContext(LoginContext);
+
+
+
 const { register, handleSubmit,formState: { errors }} = useForm({
     resolver: zodResolver(schema)
   });
@@ -24,7 +30,10 @@ const { register, handleSubmit,formState: { errors }} = useForm({
     authRequest(body)
         .then((response) =>{
             localStorage.setItem("Authorization",`Bearer ${response.accessToken}`);
-            navigate("/home")
+            localStorage.setItem("Role",`${response.role}`);
+
+            login()
+            navigate("/")
         })
         .catch(() => alert("Bad Credential"))
   }

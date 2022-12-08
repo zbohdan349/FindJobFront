@@ -37,7 +37,7 @@ export const HomePage = () => {
   return (
     <MainLayout>
       <div className='h-96  w-full flex justify-center items-center bg-additional-color '>
-          <Button>sadd</Button>
+          <Button>Log out</Button>
       </div>
       <Center>
         <div className="w-full flex justify-center pt-7 max-w-7xl">
