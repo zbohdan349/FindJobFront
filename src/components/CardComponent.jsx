@@ -36,11 +36,10 @@ export const CardComponent = (props) => {
       <Text size="sm" className='text-text-color'>
         {desc}
       </Text>
-
+      <Link to={`/vacancies/${id}`}>
       <Button className='w-full mt-2 hover:bg-hover-color transition-all'>
-        <Link to={`/vacancies/${id}`}>Перейти до вакансії </Link>
-
-      </Button>
+        Перейти до вакансії 
+      </Button></Link>
     </Card>
   );
 };

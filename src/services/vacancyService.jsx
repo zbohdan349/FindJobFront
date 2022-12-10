@@ -29,12 +29,30 @@ export const useServices = () =>{
         return  response;
     }
 
+    const addVacancyRequest = async (body) =>{
+        const response = await request(`${_URL}addVacancy`,'POST',JSON.stringify(body));
+        return  response;
+    }
+
+    const addCategoryRequest = async (body) =>{
+        const response = await request(`${_URL}categories`,'POST',JSON.stringify(body));
+        return  response;
+    }
+    const addTeamWorkRequest = async (body) =>{
+        const response = await request(`${_URL}teamwork`,'POST',JSON.stringify(body));
+        return  response;
+    }
+
+
     return {
         getRandomVacancies,
         authRequest,
         getFilterProperties,
         getFilteredVacancies,
-        getVacancyById
+        getVacancyById,
+        addVacancyRequest,
+        addCategoryRequest,
+        addTeamWorkRequest
     }
 }
 

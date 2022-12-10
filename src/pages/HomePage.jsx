@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { CardComponent } from "../components/CardComponent"
 import { MainLayout } from "../layout/MainLayout"
 import { useServices } from "../services/vacancyService"
+import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
 
@@ -37,9 +38,9 @@ export const HomePage = () => {
   return (
     <MainLayout>
       <div className='h-96  w-full flex justify-center items-center bg-additional-color '>
-          <Button>Log out</Button>
+        <Link to='/search'><Button className='hover:bg-hover-color'>Почати пошук</Button></Link>
       </div>
-      <Center>
+      <Center className="mb-8">
         <div className="w-full flex justify-center pt-7 max-w-7xl">
           {list}
         </div>

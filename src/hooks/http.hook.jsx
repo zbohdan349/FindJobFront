@@ -10,11 +10,11 @@ export const useHttp = () => {
     const request = useCallback( async (url, method ='GET',body=null,headers={'Content-Type':'application/json'}) =>{
         setLoading(true);
         const token = localStorage.getItem('Authorization');
-        if(!token) headers.Authorization = token;
+        headers.Authorization = token;
         
         try {
             const response = await fetch(url,{method,body:body,headers});
-            console.log(body)
+            console.log(token)
 
             if (!response.ok) {
                 if ([401, 403].includes(response.status)) {
