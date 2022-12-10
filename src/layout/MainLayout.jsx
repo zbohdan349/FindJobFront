@@ -7,10 +7,12 @@ import { useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { Avatar, Menu } from '@mantine/core';
 import {LoginContext} from '../App'
+import { AddVacancyModal } from '../components/AddVacancyModal';
+import { AddCategoryModal } from '../components/AddCategoryModal';
 
 export const MainLayout = ({children}) => {
 
-  const location = useLocation()
+  const location = useLocation();
   const {isAuth,role,logout} = useContext(LoginContext);
 
 
@@ -46,23 +48,26 @@ export const MainLayout = ({children}) => {
         <Link to='/login'><Button className='hover:bg-hover-color'>Log in</Button></Link>
       </div>) : (
         
+        
       <div className='pr-8'>
+         {role ==="COMPANY"? 
+        (
+          <AddVacancyModal/>
+        ):null}
+        {role ==="ADMIN"? 
+        (
+          <AddCategoryModal/>
+        ):null}
         <Menu shadow="md" width={140}>
-        <Menu.Target >
-          <div className='cursor-pointer'>
-            <Avatar radius="xl">MK</Avatar>
-          </div>
-      </Menu.Target>
       <Menu.Target >
           <div className='cursor-pointer'>
             <Avatar radius="xl">MK</Avatar>
           </div>
       </Menu.Target>
 
-     
-
       <Menu.Dropdown className='bg-secondary-bg-color border-none '>
-        <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Settings</Menu.Item>
+       
+        
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Messages</Menu.Item>
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Gallery</Menu.Item>
         <Divider className=''/>
