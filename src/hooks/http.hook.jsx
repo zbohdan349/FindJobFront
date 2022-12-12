@@ -13,7 +13,7 @@ export const useHttp = () => {
         headers.Authorization = token;
         
         try {
-            const response = await fetch(url,{method,body:body,headers});
+            const response = await fetch(url,{method,body:body,headers,referrerPolicy: "unsafe_url" });
             if (!response.ok) {
                 if (response.status ===401) {
                     // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
