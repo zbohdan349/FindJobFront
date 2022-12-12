@@ -1,6 +1,6 @@
 import { useHttp } from "../hooks/http.hook";
 
-const _URL = "http://localhost:8080/";
+const _URL = "http://findjob-env.eba-3adeh22c.eu-central-1.elasticbeanstalk.com/";
 
 export const useServices = () =>{
     const{request} =useHttp();
