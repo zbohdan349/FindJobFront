@@ -45,7 +45,7 @@ export function AddCategoryModal() {
       </Modal>
 
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Додати категорію</Button>
+        <Button className='hover:bg-hover-color' onClick={() => setOpened(true)}>Додати категорію</Button>
       </Group>
     </>
   );

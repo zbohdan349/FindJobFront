@@ -2,13 +2,11 @@ import { MainLayout } from "../layout/MainLayout"
 import { FilterForm } from "../components/FilterForm"
 import { CardComponent } from "../components/CardComponent"
 import { useServices } from "../services/vacancyService"
-import { useState } from "react"
-import { useEffect } from "react"
-import { date } from "zod"
+import { useState,useEffect } from "react"
 
 export const SearchPage = ( ) => {
   const [reqObj,setReqObj] = useState({})
-  const {getRandomVacancies,getFilteredVacancies} = useServices();
+  const {getFilteredVacancies} = useServices();
   const [list,setList] = useState([]);
 
    

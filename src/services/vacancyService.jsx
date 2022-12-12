@@ -42,7 +42,25 @@ export const useServices = () =>{
         const response = await request(`${_URL}teamwork`,'POST',JSON.stringify(body));
         return  response;
     }
+    const getActiveTeamWorkRequest = async () =>{
+        const response = await request(`${_URL}teamwork/active`);
+        return  response;
+    }
+    const updateTeamWorkRequest = async (email) =>{
+        const response = await request(`${_URL}teamwork/${email}`,'PUT');
+        console.log(response);
+        return  response;
+    }
+    const registrationRequest = async (body) =>{
+        const response = await request(`${_URL}registration`,'POST',JSON.stringify(body));
+        console.log(response);
+        return  response;
+    }
 
+    const getIMg = async () =>{
+        const response = await request(`${_URL}files/current`);
+        return  response;
+    }
 
     return {
         getRandomVacancies,
@@ -52,7 +70,11 @@ export const useServices = () =>{
         getVacancyById,
         addVacancyRequest,
         addCategoryRequest,
-        addTeamWorkRequest
+        addTeamWorkRequest,
+        getActiveTeamWorkRequest,
+        updateTeamWorkRequest,
+        registrationRequest,
+        getIMg
     }
 }
 

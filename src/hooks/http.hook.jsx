@@ -14,13 +14,10 @@ export const useHttp = () => {
         
         try {
             const response = await fetch(url,{method,body:body,headers});
-            console.log(token)
-
             if (!response.ok) {
-                if ([401, 403].includes(response.status)) {
+                if (response.status ===401) {
                     // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
                     localStorage.removeItem('Authorization');
-                    
                     navigate('/login');
                 }
                 throw new Error(`Could not fetch ${url}, status: ${response.status}`);

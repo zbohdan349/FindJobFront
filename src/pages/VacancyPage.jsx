@@ -21,7 +21,6 @@ export const VacancyPage = () =>{
     },[vacancyId]);
 
      const addTeamWork = () =>{
-      console.log("_________________")
       addTeamWorkRequest({id:vacancyId}).then(result =>{
         let m;
         if(result){

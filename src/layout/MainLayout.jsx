@@ -4,16 +4,31 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { Button, Divider } from '@mantine/core';
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext ,useEffect,useState} from 'react';
 import { Avatar, Menu } from '@mantine/core';
 import {LoginContext} from '../App'
 import { AddVacancyModal } from '../components/AddVacancyModal';
 import { AddCategoryModal } from '../components/AddCategoryModal';
+import { Notification } from '../components/Notification';
+import { useServices } from '../services/vacancyService';
 
 export const MainLayout = ({children}) => {
 
   const location = useLocation();
   const {isAuth,role,logout} = useContext(LoginContext);
+  const [img,setImg] = useState();
+  const {getIMg} = useServices();
+
+  useEffect ( ()=>{
+   if(isAuth){
+    getIMg().then(r =>{
+      console.log(r)
+      setImg(r)
+    })
+   }
+    
+  },[])
+
 
 
   return (
@@ -31,7 +46,7 @@ export const MainLayout = ({children}) => {
           )}
         >
           <a href='s' className=' text-text-color'>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/'>Головна</NavLink>
           </a>
         </li>
         <li className={clsx(
@@ -40,19 +55,24 @@ export const MainLayout = ({children}) => {
           )}
         >
         <a href='s' className='pb-1 text-text-color'>
-            <NavLink to='/search' >Search</NavLink>
+            <NavLink to='/search' >Шукати</NavLink>
           </a>
         </li>
       </ul>
       {!isAuth ? (<div className='pr-8'>
-        <Link to='/login'><Button className='hover:bg-hover-color'>Log in</Button></Link>
+        <Link to='/login'><Button className='hover:bg-hover-color'>Увійти</Button></Link>
+        <Link to='/registration'><Button className='hover:bg-hover-color'>Зареєструватися</Button></Link>
       </div>) : (
         
         
-      <div className='pr-8'>
-         {role ==="COMPANY"? 
+      <div className='pr-8 flex'>
+      {role ==="COMPANY"? 
         (
-          <AddVacancyModal/>
+          <div className='flex'>
+            <Notification/>
+            <AddVacancyModal/>
+          </div>
+          
         ):null}
         {role ==="ADMIN"? 
         (
@@ -61,15 +81,12 @@ export const MainLayout = ({children}) => {
         <Menu shadow="md" width={140}>
       <Menu.Target >
           <div className='cursor-pointer'>
-            <Avatar radius="xl">MK</Avatar>
+            <Avatar src={img?.imgPath} radius="xl">MK</Avatar>
           </div>
       </Menu.Target>
 
       <Menu.Dropdown className='bg-secondary-bg-color border-none '>
        
-        
-        <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Messages</Menu.Item>
-        <Menu.Item className='text-text-color hover:bg-hover-color' icon={''}>Gallery</Menu.Item>
         <Divider className=''/>
         <Menu.Item className='text-text-color hover:bg-hover-color' icon={''} onClick={logout}>
         <Link to={`/`}>Log out</Link></Menu.Item>

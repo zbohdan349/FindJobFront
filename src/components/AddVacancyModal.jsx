@@ -143,7 +143,7 @@ export function AddVacancyModal() {
       </Modal>
 
       <Group position="center">
-        <Button onClick={() => setOpened(true)}>Додати вакансію</Button>
+        <Button className='hover:bg-hover-color' onClick={() => setOpened(true)}>Додати вакансію</Button>
       </Group>
     </>
   );

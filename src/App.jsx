@@ -3,6 +3,7 @@ import  {LoginPage}  from "./pages/LoginPage";
 import { HomePage } from "./pages/HomePage";
 import { SearchPage} from "./pages/SearchPage";
 import { VacancyPage } from "./pages/VacancyPage";
+import { RegistrationPage } from "./pages/RegistationPage";
 
 import {
   HashRouter,
@@ -30,6 +31,7 @@ const login =() =>{
           <Route path="/" element={<HomePage />} />
           <Route   index path={'vacancies/:vacancyId'} element={<VacancyPage/>}/>
           <Route index path='login' element={<LoginPage />} />
+          <Route index path='registration' element={<RegistrationPage />} />
           
           <Route index path='search' element={<SearchPage />} />
          
